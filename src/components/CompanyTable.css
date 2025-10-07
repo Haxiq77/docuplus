@@ -1,0 +1,303 @@
+/* Company Table Section */
+.company-table-section {
+  margin-bottom: 40px;
+}
+
+/* Middle Section - Search and Create Company */
+.middle-section {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  padding: 5px 0;
+  gap: 20px;
+}
+
+.search-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.search-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  margin-top: 80px;
+}
+
+.search-input {
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  margin-top: 80px;
+  border-radius: 6px;
+  font-size: 14px;
+  width: 250px;
+}
+
+.create-company-btn {
+  background-color: #3b82f6;
+  color: white;
+  margin-top: 80px;
+  border: none;
+  border-radius: 6px;
+  margin-right: 25px;
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.create-company-btn:hover {
+  background-color: #2563eb;
+}
+
+/* Table Section */
+.table-section {
+  margin-bottom: 20px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.company-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+   min-height: 500px; /*/table high */
+}
+
+.company-table th:nth-child(1),
+.company-table td:nth-child(1) {
+  width: 25%;
+}
+
+.company-table th:nth-child(2),
+.company-table td:nth-child(2) {
+  width: 35%;
+}
+
+.company-table th:nth-child(3),
+.company-table td:nth-child(3) {
+  width: 15%;
+  text-align: center;
+}
+
+.company-table th:nth-child(4),
+.company-table td:nth-child(4) {
+  width: 25%;
+  text-align: center;
+}
+
+.company-table th {
+  background-color: #1e3a8a;
+  color: white;
+  font-weight: 600;
+  padding: 20px 20px;
+  text-align: left;
+  border-bottom: 1px solid #3b82f6;
+  font-size: 14px;
+  height: 60px;
+}
+
+.company-table td {
+  padding: 20px 20px;
+  border-bottom: 2px solid #e5e7eb;
+  font-size: 14px;
+  color: #333;
+  height: 60px;
+}
+
+.company-table tr:hover {
+  background-color: #f8f9fa;
+}
+
+/* Group Tags */
+.group-tags {
+  display: flex;
+  gap: 5px;
+}
+
+.group-tag {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
+}
+
+.group-tag.blue {
+  background-color: #3b82f6;
+}
+
+.group-tag.yellow {
+  background-color: #f59e0b;
+}
+
+.group-tag.green {
+  background-color: #10b981;
+}
+
+.group-tag.pink {
+  background-color: #ec4899;
+}
+
+/* Toggle Switch */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 24px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #16a34a; /* Same blue as welcome banner */
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+/* Action Buttons */
+.action-btn {
+  border: none;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-right: 8px;
+  transition: all 0.3s ease;
+}
+
+.enter-btn {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.enter-btn:hover {
+  background-color: #2563eb;
+}
+
+.delete-btn {
+  background-color: #f3f4f6;
+  color: #6b7280;
+  font-size: 14px;
+  padding: 6px 8px;
+}
+
+.delete-btn:hover {
+  background-color: #e5e7eb;
+}
+
+/* Company Name Cell with State Dropdown */
+.company-name-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.company-name {
+  font-weight: 500;
+  color: #333;
+}
+
+.state-dropdown-inline {
+  padding: 6px 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background-color: white;
+  font-size: 12px;
+  color: #666;
+  cursor: pointer;
+  width: 100%;
+  transition: border-color 0.3s ease;
+}
+
+.state-dropdown-inline:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+
+.state-dropdown-inline:hover {
+  border-color: #9ca3af;
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-top: 1px solid #e9ecef;
+}
+
+.pagination-info {
+  font-size: 14px;
+  color: #666;
+}
+
+.pagination-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.pagination-btn {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  background-color: white;
+  color: #333;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.pagination-btn:hover {
+  background-color: #f8f9fa;
+}
+
+.pagination-btn.active {
+  background-color: #3b82f6;
+  color: white;
+  border-color: #3b82f6;
+}
