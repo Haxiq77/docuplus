@@ -8,7 +8,9 @@ import CompanyInfo from './components/CompanyInfo';
 import UserSettings from './components/UserSettings';
 import TemplatesReminders from './components/TemplatesReminders';
 import UsageLogs from './components/UsageLogs';
+import ApiIntegration from './components/ApiIntegration';
 import BillingInvoice from './components/BillingInvoice';
+import LogoutPage from './components/LogoutPage';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('dashboard');
@@ -27,8 +29,12 @@ function App() {
         return <TemplatesReminders />;
       case 'usage-logs':
         return <UsageLogs />;
+      case 'api-integration':
+        return <ApiIntegration />;
       case 'billing-invoice':
         return <BillingInvoice />;
+      case 'logout':
+        return <LogoutPage />;
       case 'dashboard':
       default:
         return (
@@ -43,11 +49,16 @@ function App() {
     }
   };
 
+  // If logout page, show only the logout page without sidebar
+  if (currentPage === 'logout') {
+    return <LogoutPage />;
+  }
+
   return (
     <div className="dashboard">
       <Sidebar onNavigate={handleNavigation} currentPage={currentPage} />
       
-      <div className={`main-content ${currentPage === 'company-info' || currentPage === 'user-settings' || currentPage === 'templates' || currentPage === 'usage-logs' || currentPage === 'billing-invoice' ? 'full-width' : ''}`}>
+      <div className={`main-content ${currentPage === 'company-info' || currentPage === 'user-settings' || currentPage === 'templates' || currentPage === 'usage-logs' || currentPage === 'api-integration' || currentPage === 'billing-invoice' ? 'full-width' : ''}`}>
         {renderMainContent()}
       </div>
     </div>

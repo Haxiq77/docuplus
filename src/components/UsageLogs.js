@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './UsageLogs.css';
 
 const UsageLogs = () => {
-  const [logs, setLogs] = useState([
+  const [logs] = useState([
     {
       id: 1,
       timestamp: '23:09 [12/05/2024]',
