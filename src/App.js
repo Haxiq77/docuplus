@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import './App.css';
-import Sidebar from './components/Sidebar';
-import WelcomeBanner from './components/WelcomeBanner';
-import CreditCard from './components/CreditCard';
-import CompanyTable from './components/CompanyTable';
+import Sidebar from './components/homepage/Sidebar';
+import WelcomeBanner from './components/homepage/WelcomeBanner';
+import CreditCard from './components/homepage/CreditCard';
+import CompanyTable from './components/homepage/CompanyTable';
 import CompanyInfo from './components/CompanyInfo';
 import UserSettings from './components/UserSettings';
 import TemplatesReminders from './components/TemplatesReminders';
@@ -11,6 +11,7 @@ import UsageLogs from './components/UsageLogs';
 import ApiIntegration from './components/ApiIntegration';
 import BillingInvoice from './components/BillingInvoice';
 import LogoutPage from './components/LogoutPage';
+import CompanyDetails from './components/homepage/companylevelsetting/CompanyDetails';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('dashboard');
@@ -35,6 +36,8 @@ function App() {
         return <BillingInvoice />;
       case 'logout':
         return <LogoutPage />;
+      case 'company-details':
+        return <CompanyDetails onNavigate={handleNavigation} />;
       case 'dashboard':
       default:
         return (
@@ -43,7 +46,7 @@ function App() {
               <WelcomeBanner />
               <CreditCard />
             </div>
-            <CompanyTable />
+            <CompanyTable onNavigate={handleNavigation} />
           </>
         );
     }
@@ -58,9 +61,13 @@ function App() {
     <div className="dashboard">
       <Sidebar onNavigate={handleNavigation} currentPage={currentPage} />
       
-      <div className={`main-content ${currentPage === 'company-info' || currentPage === 'user-settings' || currentPage === 'templates' || currentPage === 'usage-logs' || currentPage === 'api-integration' || currentPage === 'billing-invoice' ? 'full-width' : ''}`}>
-        {renderMainContent()}
-      </div>
+      {currentPage === 'company-details' ? (
+        renderMainContent()
+      ) : (
+        <div className={`main-content ${currentPage === 'company-info' || currentPage === 'user-settings' || currentPage === 'templates' || currentPage === 'usage-logs' || currentPage === 'api-integration' || currentPage === 'billing-invoice' ? 'full-width' : ''}`}>
+          {renderMainContent()}
+        </div>
+      )}
     </div>
   );
 }

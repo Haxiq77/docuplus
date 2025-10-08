@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './CompanyTable.css';
 
-const CompanyTable = () => {
+const CompanyTable = ({ onNavigate }) => {
   const [companies, setCompanies] = useState([
     {
       id: 1,
@@ -85,6 +85,12 @@ const CompanyTable = () => {
     setCompanies(prev => prev.filter(company => company.id !== id));
   };
 
+  const handleEnterCompany = (companyId) => {
+    if (onNavigate) {
+      onNavigate('company-details');
+    }
+  };
+
   return (
     <div className="company-table-section">
       {/* Search and Create Company Section */}
@@ -139,13 +145,20 @@ const CompanyTable = () => {
                   </label>
                 </td>
                 <td>
-                  <button className="action-btn enter-btn">Enter</button>
-                  <button 
-                    className="action-btn delete-btn"
-                    onClick={() => handleDeleteCompany(company.id)}
-                  >
-                    🗑️
-                  </button>
+                  <div className="action-buttons-container">
+                    <button 
+                      className="enter-btn"
+                      onClick={() => handleEnterCompany(company.id)}
+                    >
+                      Enter
+                    </button>
+                    <button 
+                      className="delete-btn"
+                      onClick={() => handleDeleteCompany(company.id)}
+                    >
+                      🗑️
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}
