@@ -1,12 +1,14 @@
 import React from 'react';
 import './LogoutPage.css';
 
-const LogoutPage = () => {
+const LogoutPage = ({ onNavigateToLogin }) => {
   const handleBackToLogin = () => {
-    // In a real application, this would redirect to the login page
-    // For now, we'll just show an alert
-    alert('Redirecting to login page...');
-    // You could use window.location.href = '/login' or React Router here
+    if (onNavigateToLogin) {
+      onNavigateToLogin();
+    } else {
+      // Fallback: redirect to login page
+      window.location.href = '/login';
+    }
   };
 
   return (

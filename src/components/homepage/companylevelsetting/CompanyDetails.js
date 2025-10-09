@@ -4,8 +4,20 @@ import './CompanyDetails.css';
 
 const CompanyDetails = ({ onNavigate }) => {
   const [activeTab, setActiveTab] = useState('tax');
-  const [showModal, setShowModal] = useState(false);
-  const [modalTab, setModalTab] = useState('company-info');
+  const [showSlidePage, setShowSlidePage] = useState(false);
+  const [slidePageTab, setSlidePageTab] = useState('company-info');
+  const [clientUsers, setClientUsers] = useState([
+    {
+      id: 1,
+      name: 'Mr Lee',
+      email: 'zyliew93@gmail.com',
+      phone: '012-3456798',
+      department: 'Accounts',
+      emailReminder: true,
+      whatsappReminder: false,
+      twoFA: false
+    }
+  ]);
   const [engagements, setEngagements] = useState([
     {
       id: 1,
@@ -69,11 +81,42 @@ const CompanyDetails = ({ onNavigate }) => {
   };
 
   const handlePersonClick = () => {
-    setShowModal(true);
+    setShowSlidePage(true);
   };
 
-  const handleCloseModal = () => {
-    setShowModal(false);
+  const handleCloseSlidePage = () => {
+    setShowSlidePage(false);
+  };
+
+  const handleAddClientUser = () => {
+    const newUser = {
+      id: clientUsers.length + 1,
+      name: 'New User',
+      email: 'user@example.com',
+      phone: '012-0000000',
+      department: 'Accounts',
+      emailReminder: false,
+      whatsappReminder: false,
+      twoFA: false
+    };
+    setClientUsers([...clientUsers, newUser]);
+  };
+
+  const handleEditClientUser = (id) => {
+    // Edit functionality can be implemented here
+    console.log('Edit user:', id);
+  };
+
+  const handleDeleteClientUser = (id) => {
+    setClientUsers(prev => prev.filter(user => user.id !== id));
+  };
+
+  const handleUserChange = (id, field, value) => {
+    setClientUsers(prev => 
+      prev.map(user => 
+        user.id === id ? { ...user, [field]: value } : user
+      )
+    );
   };
 
   return (
@@ -219,32 +262,32 @@ const CompanyDetails = ({ onNavigate }) => {
         </div>
       </div>
 
-      {/* Modal */}
-      {showModal && (
-        <div className="modal-overlay" onClick={handleCloseModal}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <div className="modal-header">
-              <h2 className="modal-title">Zuss Coffee Sdn. Bhd.</h2>
-              <button className="modal-close" onClick={handleCloseModal}>×</button>
+      {/* Slide Page */}
+      {showSlidePage && (
+        <div className="slide-page-overlay" onClick={handleCloseSlidePage}>
+          <div className="slide-page-content" onClick={(e) => e.stopPropagation()}>
+            <div className="slide-page-header">
+              <h2 className="slide-page-title">Zuss Coffee Sdn. Bhd.</h2>
+              <button className="slide-page-close" onClick={handleCloseSlidePage}>×</button>
             </div>
             
-            <div className="modal-tabs">
+            <div className="slide-page-tabs">
               <button 
-                className={`modal-tab ${modalTab === 'company-info' ? 'active' : ''}`}
-                onClick={() => setModalTab('company-info')}
+                className={`slide-page-tab ${slidePageTab === 'company-info' ? 'active' : ''}`}
+                onClick={() => setSlidePageTab('company-info')}
               >
                 Company Information
               </button>
               <button 
-                className={`modal-tab ${modalTab === 'client-user' ? 'active' : ''}`}
-                onClick={() => setModalTab('client-user')}
+                className={`slide-page-tab ${slidePageTab === 'client-user' ? 'active' : ''}`}
+                onClick={() => setSlidePageTab('client-user')}
               >
                 Client User
               </button>
             </div>
 
-            <div className="modal-body">
-              {modalTab === 'company-info' ? (
+            <div className="slide-page-body">
+              {slidePageTab === 'company-info' ? (
                 <div className="company-info-form">
                   {/* Corporate Info Section */}
                   <div className="form-section">
@@ -387,7 +430,115 @@ const CompanyDetails = ({ onNavigate }) => {
                 </div>
               ) : (
                 <div className="client-user-content">
-                  <p>Client User content will be added here.</p>
+                  <div className="client-user-header">
+                    <h3 className="client-user-title">Client Users</h3>
+                    <button className="add-user-btn" onClick={handleAddClientUser}>
+                      ➕ Add User
+                    </button>
+                  </div>
+                  
+                  <div className="client-user-table-container">
+                    <table className="client-user-table">
+                      <thead>
+                        <tr>
+                          <th>Name</th>
+                          <th>Contact method</th>
+                          <th>Departments</th>
+                          <th>Reminder</th>
+                          <th>2FA</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {clientUsers.map((user) => (
+                          <tr key={user.id}>
+                            <td className="user-name-cell">
+                              <input
+                                type="text"
+                                className="user-name-input"
+                                value={user.name}
+                                onChange={(e) => handleUserChange(user.id, 'name', e.target.value)}
+                              />
+                            </td>
+                            <td className="user-contact-cell">
+                              <div className="contact-info">
+                                <input
+                                  type="email"
+                                  className="contact-input"
+                                  value={user.email}
+                                  onChange={(e) => handleUserChange(user.id, 'email', e.target.value)}
+                                />
+                                <input
+                                  type="tel"
+                                  className="contact-input"
+                                  value={user.phone}
+                                  onChange={(e) => handleUserChange(user.id, 'phone', e.target.value)}
+                                />
+                              </div>
+                            </td>
+                            <td className="user-department-cell">
+                              <select
+                                className="department-select"
+                                value={user.department}
+                                onChange={(e) => handleUserChange(user.id, 'department', e.target.value)}
+                              >
+                                <option value="Accounts">Accounts</option>
+                                <option value="Audit">Audit</option>
+                                <option value="Tax">Tax</option>
+                                <option value="Secretary">Secretary</option>
+                                <option value="Billing">Billing</option>
+                                <option value="Archives">Archives</option>
+                              </select>
+                            </td>
+                            <td className="user-reminder-cell">
+                              <div className="reminder-options">
+                                <label className="reminder-option">
+                                  <input
+                                    type="checkbox"
+                                    checked={user.emailReminder}
+                                    onChange={(e) => handleUserChange(user.id, 'emailReminder', e.target.checked)}
+                                  />
+                                  <span>Email [Y/N]</span>
+                                </label>
+                                <label className="reminder-option">
+                                  <input
+                                    type="checkbox"
+                                    checked={user.whatsappReminder}
+                                    onChange={(e) => handleUserChange(user.id, 'whatsappReminder', e.target.checked)}
+                                  />
+                                  <span>Whatsapp [Y/N]</span>
+                                </label>
+                              </div>
+                            </td>
+                            <td className="user-2fa-cell">
+                              <button
+                                className={`twofa-toggle ${user.twoFA ? 'enabled' : 'disabled'}`}
+                                onClick={() => handleUserChange(user.id, 'twoFA', !user.twoFA)}
+                              >
+                                {user.twoFA ? 'Disable' : 'Enable'}
+                              </button>
+                            </td>
+                            <td className="user-actions-cell">
+                              <div className="user-action-buttons">
+                                <button
+                                  className="edit-user-btn"
+                                  onClick={() => handleEditClientUser(user.id)}
+                                >
+                                  [Edit]
+                                </button>
+                                <button
+                                  className="delete-user-btn"
+                                  onClick={() => handleDeleteClientUser(user.id)}
+                                >
+                                  [Delete]
+                                </button>
+                              </div>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               )}
             </div>

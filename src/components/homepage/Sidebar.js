@@ -10,7 +10,6 @@ const Sidebar = ({ onNavigate, currentPage }) => {
     { id: 'usage-logs', icon: '📊', text: 'Usage Logs' },
     { id: 'api-integration', icon: '🔗', text: 'API Integration' },
     { id: 'billing-invoice', icon: '🧾', text: 'Billing & Invoice' },
-  
     { id: 'logout', icon: '❌', text: 'Log out' }
   ];
 

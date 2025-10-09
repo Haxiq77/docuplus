@@ -11,6 +11,7 @@ import UsageLogs from './components/UsageLogs';
 import ApiIntegration from './components/ApiIntegration';
 import BillingInvoice from './components/BillingInvoice';
 import LogoutPage from './components/LogoutPage';
+import LoginPage from './components/LoginPage';
 import CompanyDetails from './components/homepage/companylevelsetting/CompanyDetails';
 
 function App() {
@@ -20,8 +21,18 @@ function App() {
     setCurrentPage(page);
   };
 
+  const handleLogin = () => {
+    setCurrentPage('dashboard');
+  };
+
+  const handleNavigateToLogin = () => {
+    setCurrentPage('login');
+  };
+
   const renderMainContent = () => {
     switch (currentPage) {
+      case 'login':
+        return <LoginPage onLogin={handleLogin} />;
       case 'company-info':
         return <CompanyInfo />;
       case 'user-settings':
@@ -35,7 +46,7 @@ function App() {
       case 'billing-invoice':
         return <BillingInvoice />;
       case 'logout':
-        return <LogoutPage />;
+        return <LogoutPage onNavigateToLogin={handleNavigateToLogin} />;
       case 'company-details':
         return <CompanyDetails onNavigate={handleNavigation} />;
       case 'dashboard':
@@ -52,9 +63,9 @@ function App() {
     }
   };
 
-  // If logout page, show only the logout page without sidebar
-  if (currentPage === 'logout') {
-    return <LogoutPage />;
+  // If logout or login page, show only the page without sidebar
+  if (currentPage === 'logout' || currentPage === 'login') {
+    return renderMainContent();
   }
 
   return (
