@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
+import Header from './components/Header';
 import Sidebar from './components/homepage/Sidebar';
 import WelcomeBanner from './components/homepage/WelcomeBanner';
 import CreditCard from './components/homepage/CreditCard';
@@ -15,18 +16,23 @@ import LoginPage from './components/LoginPage';
 import CompanyDetails from './components/homepage/companylevelsetting/CompanyDetails';
 
 function App() {
-  const [currentPage, setCurrentPage] = useState('dashboard');
+  const [currentPage, setCurrentPage] = useState('homepage');
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   const handleNavigation = (page) => {
     setCurrentPage(page);
   };
 
   const handleLogin = () => {
-    setCurrentPage('dashboard');
+    setCurrentPage('homepage');
   };
 
   const handleNavigateToLogin = () => {
     setCurrentPage('login');
+  };
+
+  const handleToggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
   };
 
   const renderMainContent = () => {
@@ -49,7 +55,7 @@ function App() {
         return <LogoutPage onNavigateToLogin={handleNavigateToLogin} />;
       case 'company-details':
         return <CompanyDetails onNavigate={handleNavigation} />;
-      case 'dashboard':
+      case 'homepage':
       default:
         return (
           <>
@@ -65,20 +71,32 @@ function App() {
 
   // If logout or login page, show only the page without sidebar
   if (currentPage === 'logout' || currentPage === 'login') {
-    return renderMainContent();
+    return (
+      <div className="app-layout">
+        <Header onToggleSidebar={handleToggleSidebar} isSidebarOpen={isSidebarOpen} />
+        <div className="main-content-with-header">
+          {renderMainContent()}
+        </div>
+      </div>
+    );
   }
 
   return (
-    <div className="dashboard">
-      <Sidebar onNavigate={handleNavigation} currentPage={currentPage} />
-      
-      {currentPage === 'company-details' ? (
-        renderMainContent()
-      ) : (
-        <div className={`main-content ${currentPage === 'company-info' || currentPage === 'user-settings' || currentPage === 'templates' || currentPage === 'usage-logs' || currentPage === 'api-integration' || currentPage === 'billing-invoice' ? 'full-width' : ''}`}>
-          {renderMainContent()}
-        </div>
-      )}
+    <div className={`app-layout ${!isSidebarOpen ? 'sidebar-closed' : ''}`}>
+      <Header onToggleSidebar={handleToggleSidebar} isSidebarOpen={isSidebarOpen} />
+      <div className="homepage">
+        <Sidebar onNavigate={handleNavigation} currentPage={currentPage} isOpen={isSidebarOpen} />
+        
+        {currentPage === 'company-details' ? (
+          <div className="main-content-with-header">
+            {renderMainContent()}
+          </div>
+        ) : (
+          <div className={`main-content ${currentPage === 'company-info' || currentPage === 'user-settings' || currentPage === 'templates' || currentPage === 'usage-logs' || currentPage === 'api-integration' || currentPage === 'billing-invoice' ? 'full-width' : ''}`}>
+            {renderMainContent()}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

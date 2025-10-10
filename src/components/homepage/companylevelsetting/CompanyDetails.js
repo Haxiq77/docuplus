@@ -6,6 +6,7 @@ const CompanyDetails = ({ onNavigate }) => {
   const [activeTab, setActiveTab] = useState('tax');
   const [showSlidePage, setShowSlidePage] = useState(false);
   const [slidePageTab, setSlidePageTab] = useState('company-info');
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [clientUsers, setClientUsers] = useState([
     {
       id: 1,
@@ -119,10 +120,19 @@ const CompanyDetails = ({ onNavigate }) => {
     );
   };
 
+  const handleToggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
   return (
     <div className="company-details-layout">
-      <CompanyDetailsSidebar onNavigate={onNavigate} currentPage="company-details" />
-      <div className="company-details-page">
+      <CompanyDetailsSidebar 
+        onNavigate={onNavigate} 
+        currentPage="company-details" 
+        isOpen={isSidebarOpen}
+        onToggle={handleToggleSidebar}
+      />
+      <div className={`company-details-page ${!isSidebarOpen ? 'sidebar-closed' : ''}`}>
         {/* Header */}
         <div className="page-header">
           <h1 className="page-title">Company Details</h1>

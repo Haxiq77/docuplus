@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { FaHome } from 'react-icons/fa';
+import { FaHome, FaTimes } from 'react-icons/fa';
 import './CompanyDetailsSidebar.css';
 
-const CompanyDetailsSidebar = ({ onNavigate, currentPage }) => {
+const CompanyDetailsSidebar = ({ onNavigate, currentPage, isOpen = true, onToggle }) => {
   const [expandedYears, setExpandedYears] = useState({
     2021: false,
     2022: false,
@@ -17,16 +17,25 @@ const CompanyDetailsSidebar = ({ onNavigate, currentPage }) => {
   };
 
   return (
-    <div className="company-details-sidebar">
+    <div className={`company-details-sidebar ${isOpen ? 'open' : 'closed'}`}>
       <div className="sidebar-header">
         <div className="header-content">
           <h1 className="logo">DOCUPLUS</h1>
-          <div 
-            className="home-icon"
-            onClick={() => onNavigate('dashboard')}
-            title="Go to Dashboard"
-          >
-            <FaHome />
+          <div className="header-actions">
+            <div 
+              className="home-icon"
+              onClick={() => onNavigate('homepage')}
+              title="Go to Homepage"
+            >
+              <FaHome />
+            </div>
+            <div 
+              className="close-icon"
+              onClick={onToggle}
+              title="Close Sidebar"
+            >
+              <FaTimes />
+            </div>
           </div>
         </div>
       </div>
@@ -36,7 +45,7 @@ const CompanyDetailsSidebar = ({ onNavigate, currentPage }) => {
         <div className="year-section">
           <div className="year-header" onClick={() => toggleYear(2021)}>
             <h3 className="year-title">2021</h3>
-            <span className={`year-arrow ${expandedYears[2021] ? 'rotated' : ''}`}>></span>
+            <span className={`year-arrow ${expandedYears[2021] ? 'rotated' : ''}`}>&gt;</span>
           </div>
           {expandedYears[2021] && (
             <div className="year-categories">
@@ -79,7 +88,7 @@ const CompanyDetailsSidebar = ({ onNavigate, currentPage }) => {
         <div className="year-section">
           <div className="year-header" onClick={() => toggleYear(2022)}>
             <h3 className="year-title">2022</h3>
-            <span className={`year-arrow ${expandedYears[2022] ? 'rotated' : ''}`}>></span>
+            <span className={`year-arrow ${expandedYears[2022] ? 'rotated' : ''}`}>&gt;</span>
           </div>
           {expandedYears[2022] && (
             <div className="year-categories">
@@ -122,7 +131,7 @@ const CompanyDetailsSidebar = ({ onNavigate, currentPage }) => {
         <div className="year-section">
           <div className="year-header" onClick={() => toggleYear(2023)}>
             <h3 className="year-title">2023</h3>
-            <span className={`year-arrow ${expandedYears[2023] ? 'rotated' : ''}`}>></span>
+            <span className={`year-arrow ${expandedYears[2023] ? 'rotated' : ''}`}>&gt;</span>
           </div>
           {expandedYears[2023] && (
             <div className="year-categories">

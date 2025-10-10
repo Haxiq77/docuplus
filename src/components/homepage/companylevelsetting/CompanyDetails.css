@@ -13,16 +13,23 @@
   min-height: 100vh;
   padding: 0;
   margin: 0;
-  margin-left: 280px;
+  margin-left: 250px;
   flex: 1;
-  width: calc(100% - 280px);
+  width: calc(100% - 250px);
+  transition: margin-left 0.3s ease, width 0.3s ease;
+}
+
+/* Sidebar Closed State */
+.company-details-page.sidebar-closed {
+  margin-left: 0;
+  width: 100%;
 }
 
 /* Page Header */
 .page-header {
   background-color: white;
   color: black;
-  padding: 30px;
+  padding: 30px 30px 30px 0;
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -34,13 +41,12 @@
   font-size: 24px;
   font-weight: 900;
   margin: 0;
-  color: black;
 }
 
 /* Client Information Section */
 .client-info-section {
   background-color: white;
-  padding: 30px;
+  padding: 30px 30px 30px 0;
   border-bottom: 1px solid #e5e7eb;
 }
 
@@ -99,7 +105,7 @@
 /* Tabs Section */
 .tabs-section {
   background-color: white;
-  padding: 0 30px;
+  padding: 0 30px 0 0;
   border-bottom: 1px solid #e5e7eb;
 }
 
@@ -134,7 +140,7 @@
 /* Engagement Section */
 .engagement-section {
   background-color: white;
-  padding: 30px;
+  padding: 30px 30px 30px 0;
   min-height: 60vh;
 }
 
@@ -917,11 +923,11 @@
 @media (max-width: 480px) {
   .client-info-section,
   .engagement-section {
-    padding: 20px;
+    padding: 20px 20px 20px 0;
   }
 
   .tabs-section {
-    padding: 0 20px;
+    padding: 0 20px 0 0;
   }
 
   .tab {

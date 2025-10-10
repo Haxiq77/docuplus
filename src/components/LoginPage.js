@@ -78,7 +78,7 @@ const LoginPage = ({ onLogin }) => {
                   placeholder="Enter your password"
                   required
                 />
-                <a href="#" className="forgot-password">Forgot Password?</a>
+                <button type="button" className="forgot-password">Forgot Password?</button>
               </div>
 
               <div className="form-group checkbox-group">
@@ -100,7 +100,7 @@ const LoginPage = ({ onLogin }) => {
             </form>
 
             <div className="create-account">
-              <p>New on our platform? <a href="#" className="create-link">Create an account</a></p>
+              <p>New on our platform? <button type="button" className="create-link">Create an account</button></p>
             </div>
 
             <div className="db-status">

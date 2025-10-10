@@ -5,8 +5,21 @@
   color: white;
   padding: 20px 0;
   position: fixed;
-  height: 100vh;
+  height: calc(100vh - 40px);
+  top: 40px;
+  left: 0;
   overflow-y: auto;
+  transition: transform 0.3s ease;
+  z-index: 999;
+}
+
+/* Sidebar Toggle States */
+.sidebar.open {
+  transform: translateX(0);
+}
+
+.sidebar.closed {
+  transform: translateX(-100%);
 }
 
 .sidebar-header {

@@ -2,7 +2,7 @@ import React from 'react';
 import { FaHome } from 'react-icons/fa';
 import './Sidebar.css';
 
-const Sidebar = ({ onNavigate, currentPage }) => {
+const Sidebar = ({ onNavigate, currentPage, isOpen = true }) => {
   const navItems = [
     { id: 'company-info', icon: '🏢', text: 'Company information' },
     { id: 'user-settings', icon: '⚙️', text: 'User & Accessibility Settings' },
@@ -14,14 +14,14 @@ const Sidebar = ({ onNavigate, currentPage }) => {
   ];
 
   return (
-    <div className="sidebar">
+    <div className={`sidebar ${isOpen ? 'open' : 'closed'}`}>
       <div className="sidebar-header">
         <div className="header-content">
           <h1 className="logo">DOCUPLUS</h1>
           <div 
             className="home-icon"
-            onClick={() => onNavigate('dashboard')}
-            title="Go to Dashboard"
+            onClick={() => onNavigate('homepage')}
+            title="Go to Homepage"
           >
             <FaHome />
           </div>
